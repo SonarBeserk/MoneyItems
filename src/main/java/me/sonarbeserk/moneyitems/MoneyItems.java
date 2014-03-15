@@ -8,6 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /***********************************************************************************************************************
  *
  * MoneyItems - Bukkit plugin that is a developer tool to drop items that when picked up give you money
@@ -71,6 +74,8 @@ public class MoneyItems extends JavaPlugin {
         }
 
         if(!getServer().getPluginManager().isPluginEnabled(this)) {return;}
+
+        new MoneyAPI(data);
     }
 
     private boolean setupEconomy() {
