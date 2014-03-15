@@ -1,1 +1,14 @@
 # English Language File
+
+# Hooking
+
+# Message to send when Vault has been hooked
+hooked-vault: "Successfully hooked into Vault!"
+
+# Warning
+
+# Warning message to send when Vault is not found
+warning-vault-not-found: "Vault was not found or was not enabled. Arrow costs will not work properly."
+
+# Warning message to send when no economy plugin is found when hooking vault
+warning-no-economy-found: "No economy plugin was found after hooking vault. Cost based arrows may not be used."

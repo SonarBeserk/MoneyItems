@@ -3,6 +3,9 @@ package me.sonarbeserk.moneyitems;
 import me.sonarbeserk.moneyitems.utils.Data;
 import me.sonarbeserk.moneyitems.utils.Language;
 import me.sonarbeserk.moneyitems.utils.Messaging;
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /***********************************************************************************************************************
@@ -31,6 +34,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  ***********************************************************************************************************************/
 public class MoneyItems extends JavaPlugin {
 
+    public static Economy economy = null;
+
     private Language language = null;
 
     private Data data = null;
@@ -46,6 +51,34 @@ public class MoneyItems extends JavaPlugin {
         data = new Data(this);
 
         messaging = new Messaging(this);
+
+        if(getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
+
+            setupEconomy();
+
+            if(economy == null) {
+
+                getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("warning-no-economy-found"))));
+            } else {
+
+                getLogger().info(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("hooked-vault"))));
+            }
+        } else {
+
+            getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("warning-vault-not-found"))));
+        }
+    }
+
+    private boolean setupEconomy() {
+
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+
+        if(economyProvider != null) {
+
+            economy = economyProvider.getProvider();
+        }
+
+        return (economy != null);
     }
 
     /**
