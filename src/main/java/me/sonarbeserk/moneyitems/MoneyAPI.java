@@ -36,7 +36,7 @@ import java.util.Random;
  ***********************************************************************************************************************/
 public class MoneyAPI {
 
-    private MoneyAPI instance = null;
+    private static MoneyAPI instance = null;
 
     private Data data = null;
 
@@ -61,7 +61,7 @@ public class MoneyAPI {
      * Returns the current instance of the api
      * @return the current instance of the api
      */
-    public MoneyAPI getInstance() {
+    public static MoneyAPI getInstance() {
 
         return instance;
     }
