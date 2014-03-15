@@ -1,0 +1,8 @@
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
+author: SonarBeserk
+
+main: me.sonarbeserk.moneyitems.MoneyItems
+
+softdepend: [Vault]
