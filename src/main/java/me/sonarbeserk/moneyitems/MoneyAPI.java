@@ -99,6 +99,9 @@ public class MoneyAPI {
 
         lore.add("uuid:" + hashedUuid + "|" + amount);
 
-        location.getWorld().dropItem(location, itemStack);
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+
+        location.getWorld().dropItemNaturally(location, itemStack);
     }
 }
