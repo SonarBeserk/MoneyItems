@@ -8,7 +8,7 @@ hooked-vault: "Successfully hooked into Vault!"
 # Warning
 
 # Warning message to send when Vault is not found
-warning-vault-not-found: "Vault was not found or was not enabled. Arrow costs will not work properly."
+warning-vault-not-found: "Vault was not found or was not enabled. Vault is required to function, disabling."
 
 # Warning message to send when no economy plugin is found when hooking vault
-warning-no-economy-found: "No economy plugin was found after hooking vault. Cost based arrows may not be used."
+warning-no-economy-found: "No economy plugin was found after hooking vault. An economy is required to function, disabling."
