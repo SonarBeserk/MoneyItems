@@ -59,6 +59,7 @@ public class MoneyItems extends JavaPlugin {
             if(economy == null) {
 
                 getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("warning-no-economy-found"))));
+                getServer().getPluginManager().disablePlugin(this);
             } else {
 
                 getLogger().info(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("hooked-vault"))));
@@ -66,7 +67,10 @@ public class MoneyItems extends JavaPlugin {
         } else {
 
             getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("warning-vault-not-found"))));
+            getServer().getPluginManager().disablePlugin(this);
         }
+
+        if(!getServer().getPluginManager().isPluginEnabled(this)) {return;}
     }
 
     private boolean setupEconomy() {
