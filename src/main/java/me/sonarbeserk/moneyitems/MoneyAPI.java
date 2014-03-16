@@ -60,4 +60,14 @@ public class MoneyAPI {
 
         plugin.spawnMoney(material, location, amount, worth);
     }
+
+    /**
+     * Returns if the uuid is found in the list of current uuids
+     * @param UUID the uuid to check for
+     * @return if the uuid is found in the list of current uuids
+     */
+    public boolean isUUIDFound(String UUID) {
+
+        return plugin.isUUIDFound(UUID);
+    }
 }

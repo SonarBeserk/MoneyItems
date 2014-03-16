@@ -165,6 +165,15 @@ public class MoneyItems extends JavaPlugin {
         location.getWorld().dropItemNaturally(location, itemStack);
     }
 
+    protected boolean isUUIDFound(String UUID) {
+
+        if(uuids == null || uuids.size() == 0) {return false;}
+
+        if(uuids.contains(UUID)) {return true;}
+
+        return false;
+    }
+
     public void onDisable() {
 
         data = null;
