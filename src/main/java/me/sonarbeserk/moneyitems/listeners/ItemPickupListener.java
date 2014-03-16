@@ -104,8 +104,9 @@ public class ItemPickupListener implements Listener {
             }
 
             plugin.economy.depositPlayer(e.getPlayer().getName(), worth);
+            plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+            MoneyAPI.getInstance().useUUID(uuid);
 
-            plugin.getMessaging().sendMessage(e.getPlayer(), false, true,             plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
             e.setCancelled(true);
             e.getItem().remove();
         }
