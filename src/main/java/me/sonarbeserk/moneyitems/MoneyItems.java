@@ -151,16 +151,23 @@ public class MoneyItems extends JavaPlugin {
 
         Random uuidRandom = new Random();
 
-        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt());
+        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + amount;
 
-        while(uuids.contains(hashedUuid + "|" + amount)) {
+        boolean added = false;
 
-            hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt());
+        while(!added) {
+
+            if(!MoneyAPI.getInstance().isUUIDFound(hashedUuid)) {
+
+                uuids.add(hashedUuid);
+                added = true;
+            } else {
+
+                hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + amount;
+            }
         }
 
-        uuids.add(hashedUuid + "|" + amount);
-
-        lore.add("uuid:" + hashedUuid + "|" + amount);
+        lore.add("uuid:" + hashedUuid);
 
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
