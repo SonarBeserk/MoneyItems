@@ -1,14 +1,7 @@
 package me.sonarbeserk.moneyitems;
 
-import me.sonarbeserk.moneyitems.utils.BCrypt;
-import me.sonarbeserk.moneyitems.utils.Data;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /***********************************************************************************************************************
  *
@@ -38,23 +31,13 @@ public class MoneyAPI {
 
     private static MoneyAPI instance = null;
 
-    private Data data = null;
+    private MoneyItems plugin = null;
 
-    private List<String> uuids = null;
-
-    public MoneyAPI(Data data) {
+    public MoneyAPI(MoneyItems plugin) {
 
         instance = this;
 
-        this.data = data;
-
-        if(data.get("uuids") != null) {
-
-            uuids = (List<String>) data.get("uuids");
-        } else {
-
-            uuids = new ArrayList<String>();
-        }
+        this.plugin = plugin;
     }
 
     /**
@@ -75,33 +58,6 @@ public class MoneyAPI {
      */
     public void spawnMoney(Material material, Location location, int amount, int worth) {
 
-        if(material == null || location == null || amount == 0 || worth == 0) {return;}
-
-        ItemStack itemStack = new ItemStack(material, amount);
-
-        ItemMeta meta = itemStack.getItemMeta();
-
-        List<String> lore = new ArrayList<String>();
-
-        lore.add("money-item");
-        lore.add("item-worth:" + worth);
-
-        Random uuidRandom = new Random();
-
-        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt());
-
-        while(uuids.contains(hashedUuid + "|" + amount)) {
-
-            hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt());
-        }
-
-        uuids.add(hashedUuid + "|" + amount);
-
-        lore.add("uuid:" + hashedUuid + "|" + amount);
-
-        meta.setLore(lore);
-        itemStack.setItemMeta(meta);
-
-        location.getWorld().dropItemNaturally(location, itemStack);
+        plugin.spawnMoney(material, location, amount, worth);
     }
 }

@@ -1,15 +1,21 @@
 package me.sonarbeserk.moneyitems;
 
+import me.sonarbeserk.moneyitems.listeners.PlayerTestListener;
+import me.sonarbeserk.moneyitems.utils.BCrypt;
 import me.sonarbeserk.moneyitems.utils.Data;
 import me.sonarbeserk.moneyitems.utils.Language;
 import me.sonarbeserk.moneyitems.utils.Messaging;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /***********************************************************************************************************************
  *
@@ -45,6 +51,8 @@ public class MoneyItems extends JavaPlugin {
 
     private Messaging messaging = null;
 
+    private List<String> uuids = null;
+
     public void onEnable() {
 
         saveDefaultConfig();
@@ -75,7 +83,15 @@ public class MoneyItems extends JavaPlugin {
 
         if(!getServer().getPluginManager().isPluginEnabled(this)) {return;}
 
-        new MoneyAPI(data);
+        if(data.get("uuids") != null) {
+
+            uuids = (List<String>) data.get("uuids");
+        } else {
+
+            uuids = new ArrayList<String>();
+        }
+
+        new MoneyAPI(this);
     }
 
     private boolean setupEconomy() {
@@ -115,6 +131,38 @@ public class MoneyItems extends JavaPlugin {
     public Messaging getMessaging() {
 
         return messaging;
+    }
+
+    protected void spawnMoney(Material material, Location location, int amount, int worth) {
+
+        if(material == null || location == null || amount == 0 || worth == 0) {return;}
+
+        ItemStack itemStack = new ItemStack(material, amount);
+
+        ItemMeta meta = itemStack.getItemMeta();
+
+        List<String> lore = new ArrayList<String>();
+
+        lore.add("money-item");
+        lore.add("item-worth:" + worth);
+
+        Random uuidRandom = new Random();
+
+        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt());
+
+        while(uuids.contains(hashedUuid + "|" + amount)) {
+
+            hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt());
+        }
+
+        uuids.add(hashedUuid + "|" + amount);
+
+        lore.add("uuid:" + hashedUuid + "|" + amount);
+
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+
+        location.getWorld().dropItemNaturally(location, itemStack);
     }
 
     public void onDisable() {
