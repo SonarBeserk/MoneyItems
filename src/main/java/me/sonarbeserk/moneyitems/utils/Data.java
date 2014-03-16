@@ -44,8 +44,6 @@ public class Data {
 	public Data(JavaPlugin plugin) {
 		
 		this.plugin = plugin;
-
-		saveDefault();
 	}
 
     /**
