@@ -95,6 +95,8 @@ public class MoneyItems extends JavaPlugin {
         new MoneyAPI(this);
 
         getServer().getPluginManager().registerEvents(new ItemPickupListener(this), this);
+
+        getServer().getPluginManager().registerEvents(new PlayerTestListener(this), this);
     }
 
     private boolean setupEconomy() {
@@ -198,6 +200,7 @@ public class MoneyItems extends JavaPlugin {
        MoneyAPI.getInstance().flushInstance();
 
         data.set("uuids", uuids);
+        data.save();
         data = null;
 
         messaging = null;
