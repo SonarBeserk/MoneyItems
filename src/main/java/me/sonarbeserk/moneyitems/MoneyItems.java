@@ -143,7 +143,7 @@ public class MoneyItems extends JavaPlugin {
         List<String> lore = new ArrayList<String>();
 
         lore.add("money-item");
-        lore.add("item-worth:" + worth);
+        lore.add("total-worth:" + worth);
 
         Random uuidRandom = new Random();
 
