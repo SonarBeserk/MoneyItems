@@ -1,5 +1,10 @@
 # English Language File
 
+# Pickup
+
+# Message to send when the player picks up money | {amount} - the amount picked up | {currency} - the name of the currency (will be use the plural form where needed)
+pickup-money: "&2You have picked up {amount} {currency}"
+
 # Hooking
 
 # Message to send when Vault has been hooked
