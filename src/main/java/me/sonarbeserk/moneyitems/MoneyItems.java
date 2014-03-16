@@ -42,7 +42,7 @@ import java.util.Random;
  ***********************************************************************************************************************/
 public class MoneyItems extends JavaPlugin {
 
-    public static Economy economy = null;
+    public Economy economy = null;
 
     private Language language = null;
 
