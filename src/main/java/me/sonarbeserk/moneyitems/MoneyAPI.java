@@ -71,6 +71,15 @@ public class MoneyAPI {
         return plugin.isUUIDFound(UUID);
     }
 
+    /**
+     * Uses up a uuid. The uuid will be removed from the listings
+     * @param UUID the uuid to use up
+     */
+    public void useUUID(String UUID) {
+
+        plugin.useUUID(UUID);
+    }
+
     protected void flushInstance() {
 
         instance = null;

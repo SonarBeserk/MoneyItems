@@ -184,6 +184,15 @@ public class MoneyItems extends JavaPlugin {
         return false;
     }
 
+    protected void useUUID(String UUID) {
+
+        if(uuids == null || uuids.size() == 0) {return;}
+
+        if(!uuids.contains(UUID)) {return;}
+
+        uuids.remove(UUID);
+    }
+
     public void onDisable() {
 
        MoneyAPI.getInstance().flushInstance();
