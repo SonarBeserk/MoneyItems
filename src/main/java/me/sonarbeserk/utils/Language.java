@@ -1,4 +1,4 @@
-package me.sonarbeserk.moneyitems.utils;
+package me.sonarbeserk.utils;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,11 +10,11 @@ import java.util.logging.Level;
 
 /***********************************************************************************************************************
  *
- * MoneyItems - Bukkit plugin that is a developer tool to drop items that when picked up give you money
+ * BeserkUtils - Premade classes for use in my bukkit plugins
  * ===========================================================================
  *
  * Copyright (C) 2014 by SonarBeserk
- * http://dev.bukkit.org/bukkit-plugins/moneyitems/
+ * https://github.com/SonarBeserk/BeserkUtils
  *
  ***********************************************************************************************************************
  *

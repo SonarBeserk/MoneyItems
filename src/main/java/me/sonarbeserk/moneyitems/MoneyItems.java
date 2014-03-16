@@ -3,9 +3,9 @@ package me.sonarbeserk.moneyitems;
 import me.sonarbeserk.moneyitems.listeners.ItemPickupListener;
 import me.sonarbeserk.moneyitems.listeners.PlayerTestListener;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
-import me.sonarbeserk.moneyitems.utils.Data;
-import me.sonarbeserk.moneyitems.utils.Language;
-import me.sonarbeserk.moneyitems.utils.Messaging;
+import me.sonarbeserk.utils.Data;
+import me.sonarbeserk.utils.Language;
+import me.sonarbeserk.utils.Messaging;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -95,8 +95,6 @@ public class MoneyItems extends JavaPlugin {
         new MoneyAPI(this);
 
         getServer().getPluginManager().registerEvents(new ItemPickupListener(this), this);
-
-        getServer().getPluginManager().registerEvents(new PlayerTestListener(this), this);
     }
 
     private boolean setupEconomy() {

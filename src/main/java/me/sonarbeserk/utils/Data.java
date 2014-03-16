@@ -1,4 +1,4 @@
-package me.sonarbeserk.moneyitems.utils;
+package me.sonarbeserk.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,11 +12,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /***********************************************************************************************************************
  *
- * MoneyItems - Bukkit plugin that is a developer tool to drop items that when picked up give you money
+ * BeserkUtils - Premade classes for use in my bukkit plugins
  * ===========================================================================
  *
  * Copyright (C) 2014 by SonarBeserk
- * http://dev.bukkit.org/bukkit-plugins/moneyitems/
+ * https://github.com/SonarBeserk/BeserkUtils
  *
  ***********************************************************************************************************************
  *
