@@ -70,4 +70,9 @@ public class MoneyAPI {
 
         return plugin.isUUIDFound(UUID);
     }
+
+    protected void flushInstance() {
+
+        instance = null;
+    }
 }

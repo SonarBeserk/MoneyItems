@@ -1,6 +1,5 @@
 package me.sonarbeserk.moneyitems;
 
-import me.sonarbeserk.moneyitems.listeners.PlayerTestListener;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
 import me.sonarbeserk.moneyitems.utils.Data;
 import me.sonarbeserk.moneyitems.utils.Language;
@@ -175,6 +174,8 @@ public class MoneyItems extends JavaPlugin {
     }
 
     public void onDisable() {
+
+       MoneyAPI.getInstance().flushInstance();
 
         data = null;
 
