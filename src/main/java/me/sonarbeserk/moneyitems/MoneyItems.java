@@ -197,6 +197,7 @@ public class MoneyItems extends JavaPlugin {
 
        MoneyAPI.getInstance().flushInstance();
 
+        data.set("uuids", uuids);
         data = null;
 
         messaging = null;
