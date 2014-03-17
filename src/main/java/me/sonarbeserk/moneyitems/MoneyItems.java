@@ -1,5 +1,6 @@
 package me.sonarbeserk.moneyitems;
 
+import me.sonarbeserk.moneyitems.events.NormalMoneyDropEvent;
 import me.sonarbeserk.moneyitems.listeners.ItemPickupListener;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
 import me.sonarbeserk.utils.Data;
@@ -170,6 +171,12 @@ public class MoneyItems extends JavaPlugin {
 
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
+
+        NormalMoneyDropEvent event = new NormalMoneyDropEvent(location, itemStack, worth);
+
+        getServer().getPluginManager().callEvent(event);
+        
+        if(event.isCancelled()) {return;}
 
         location.getWorld().dropItemNaturally(location, itemStack);
     }
