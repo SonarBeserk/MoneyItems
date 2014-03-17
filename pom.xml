@@ -5,7 +5,7 @@
     <name>MoneyItems</name>
     <groupId>me.sonarbeserk</groupId>
     <artifactId>moneyitems</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <inceptionYear>2014</inceptionYear>
     <description>Developer tool to drop items that when picked up give you money</description>
 
