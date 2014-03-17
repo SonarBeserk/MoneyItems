@@ -69,6 +69,10 @@ public class ItemPickupListener implements Listener {
                     validUUID = true;
                     uuid = splitString[1];
                     continue;
+                } else {
+
+                    remove = true;
+                    continue;
                 }
             }
 
@@ -79,6 +83,8 @@ public class ItemPickupListener implements Listener {
                 if(splitString.length == 1) {remove = true; continue;}
 
                 worth = Integer.parseInt(splitString[1].replaceAll("[a-zA-Z]", ""));
+
+                continue;
             }
         }
 
