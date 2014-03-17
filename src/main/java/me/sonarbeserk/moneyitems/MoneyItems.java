@@ -119,37 +119,37 @@ public class MoneyItems extends JavaPlugin {
         return (economy != null);
     }
 
-    private void checkForUpdates()
-    {
-        if (getConfig().getBoolean("settings.updater.enabled"))
-        {
-            if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify"))
-            {
-                this.updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, getConfig().getBoolean("settings.updater.notify-downloads"));
+    private void checkForUpdates() {
 
-                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(this.updater.getLatestName().replaceAll("[a-zA-Z]", "")))
-                {
+        if(getConfig().getBoolean("settings.updater.enabled")) {
+
+            if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
+
+                updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, getConfig().getBoolean("settings.updater.notify-downloads"));
+
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(this.updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
+
                     getLogger().info(getLanguage().getMessage("updater-up-to-date"));
-                    this.upToDate = true;
+                    upToDate = true;
                 }
 
-                if ((this.updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE) && (!this.upToDate))
-                {
-                    getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", this.updater.getLatestName()).replace("{link}", this.updater.getLatestFileLink()));
-                }
-            } else if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("update"))
-            {
-                this.updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.notify-downloads"));
+                if(updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !this.upToDate) {
 
-                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(this.updater.getLatestName().replaceAll("[a-zA-Z]", "")))
-                {
+                    getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", updater.getLatestName()).replace("{link}", this.updater.getLatestFileLink()));
+                }
+            } else if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
+
+                updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.notify-downloads"));
+
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
+
                     getLogger().info(getLanguage().getMessage("updater-up-to-date"));
-                    this.upToDate = true;
+                    upToDate = true;
                 }
 
-                if ((this.updater.getResult() == Updater.UpdateResult.SUCCESS) && (!this.upToDate))
-                {
-                    getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", this.updater.getLatestName()));
+                if(updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
+
+                    getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", updater.getLatestName()));
                 }
             }
 
@@ -157,6 +157,10 @@ public class MoneyItems extends JavaPlugin {
         }
     }
 
+    /**
+     * Returns the plugin updater instance
+     * @return the plugin updater instance
+     */
     public Updater getUpdater()
     {
         return this.updater;
