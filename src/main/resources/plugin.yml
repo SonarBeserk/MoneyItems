@@ -6,3 +6,8 @@ author: SonarBeserk
 main: me.sonarbeserk.moneyitems.MoneyItems
 
 softdepend: [Vault]
+
+permissions:
+  moneyitems.notify.updates:
+    description: notifies players with this permission of plugin updates
+    default: op

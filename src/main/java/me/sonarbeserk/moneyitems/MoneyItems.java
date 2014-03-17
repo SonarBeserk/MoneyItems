@@ -2,6 +2,8 @@ package me.sonarbeserk.moneyitems;
 
 import me.sonarbeserk.moneyitems.events.NormalMoneyDropEvent;
 import me.sonarbeserk.moneyitems.listeners.ItemPickupListener;
+import me.sonarbeserk.moneyitems.updating.UpdateListener;
+import me.sonarbeserk.moneyitems.updating.Updater;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
 import me.sonarbeserk.utils.Data;
 import me.sonarbeserk.utils.Language;
@@ -51,6 +53,14 @@ public class MoneyItems extends JavaPlugin {
     private Data data = null;
 
     private Messaging messaging = null;
+
+    private Updater updater = null;
+
+    private boolean upToDate = false;
+
+    public boolean updateFound = false;
+
+    public boolean updateDownloaded = false;
 
     private List<String> uuids = null;
 
@@ -107,6 +117,57 @@ public class MoneyItems extends JavaPlugin {
         }
 
         return (economy != null);
+    }
+
+    private void checkForUpdates()
+    {
+        if (getConfig().getBoolean("settings.updater.enabled"))
+        {
+            if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify"))
+            {
+                this.updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, getConfig().getBoolean("settings.updater.notify-downloads"));
+
+                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(this.updater.getLatestName().replaceAll("[a-zA-Z]", "")))
+                {
+                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
+                    this.upToDate = true;
+                }
+
+                if ((this.updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE) && (!this.upToDate))
+                {
+                    getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", this.updater.getLatestName()).replace("{link}", this.updater.getLatestFileLink()));
+                }
+            } else if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("update"))
+            {
+                this.updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.notify-downloads"));
+
+                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(this.updater.getLatestName().replaceAll("[a-zA-Z]", "")))
+                {
+                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
+                    this.upToDate = true;
+                }
+
+                if ((this.updater.getResult() == Updater.UpdateResult.SUCCESS) && (!this.upToDate))
+                {
+                    getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", this.updater.getLatestName()));
+                }
+            } else if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("force-update"))
+            {
+                this.updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.NO_VERSION_CHECK, getConfig().getBoolean("settings.updater.notify-downloads"));
+
+                if (this.updater.getResult() == Updater.UpdateResult.SUCCESS)
+                {
+                    getLogger().info(getLanguage().getMessage("updater-force-updated").replace("{new}", this.updater.getLatestName()));
+                }
+            }
+
+            getServer().getPluginManager().registerEvents(new UpdateListener(this), this);
+        }
+    }
+
+    public Updater getUpdater()
+    {
+        return this.updater;
     }
 
     /**
@@ -175,7 +236,7 @@ public class MoneyItems extends JavaPlugin {
         NormalMoneyDropEvent event = new NormalMoneyDropEvent(location, itemStack, worth);
 
         getServer().getPluginManager().callEvent(event);
-        
+
         if(event.isCancelled()) {return;}
 
         location.getWorld().dropItemNaturally(location, itemStack);
