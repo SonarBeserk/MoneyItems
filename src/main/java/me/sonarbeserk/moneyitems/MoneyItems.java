@@ -151,14 +151,6 @@ public class MoneyItems extends JavaPlugin {
                 {
                     getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", this.updater.getLatestName()));
                 }
-            } else if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("force-update"))
-            {
-                this.updater = new Updater(this, /*replace with the proper id*/, getFile(), Updater.UpdateType.NO_VERSION_CHECK, getConfig().getBoolean("settings.updater.notify-downloads"));
-
-                if (this.updater.getResult() == Updater.UpdateResult.SUCCESS)
-                {
-                    getLogger().info(getLanguage().getMessage("updater-force-updated").replace("{new}", this.updater.getLatestName()));
-                }
             }
 
             getServer().getPluginManager().registerEvents(new UpdateListener(this), this);

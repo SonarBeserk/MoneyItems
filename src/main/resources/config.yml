@@ -14,3 +14,15 @@ settings:
 
   # What prefix should be used for the plugin? | {name} is replaced with the plugin name
   prefix: "&f[&r&b{name}&r&f]"
+
+  # Updater Settings
+  updater:
+
+    # Is the updater enabled?
+    enabled: true
+
+    # What modes should be used when updating? | notify - notifies console and people with permission of new updates | update - downloads new updates then notifies console and people with relevent permissions
+    mode: notify
+
+    # Should the download information of updates be logged to console?
+    notify-downloads: false
