@@ -1,7 +1,6 @@
 package me.sonarbeserk.moneyitems;
 
 import me.sonarbeserk.moneyitems.listeners.ItemPickupListener;
-import me.sonarbeserk.moneyitems.listeners.PlayerTestListener;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
 import me.sonarbeserk.utils.Data;
 import me.sonarbeserk.utils.Language;
@@ -136,7 +135,7 @@ public class MoneyItems extends JavaPlugin {
         return messaging;
     }
 
-    protected void spawnMoney(Material material, Location location, int amount, int worth) {
+    protected void spawnMoney(Location location, Material material, int amount, int worth) {
 
         if(material == null || location == null || amount == 0 || worth == 0) {return;}
 
