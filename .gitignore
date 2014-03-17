@@ -13,6 +13,9 @@
 # Maven
 target/
 
+# Java
+docs/
+
 # Package Files #
 *.jar
 *.war
