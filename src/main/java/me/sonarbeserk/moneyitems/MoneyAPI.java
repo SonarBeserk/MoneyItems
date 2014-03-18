@@ -53,12 +53,12 @@ public class MoneyAPI {
      * Spawns an amount of money at a location
      * @param location the location to spawn the money it
      * @param material the material to use for the money
-     * @param amount the amount of money to spawn (used for visual purposes)
+     * @param stackSize to size of the itemstack to spawn (used for visual purposes)
      * @param worth the total worth of the money spawned
      */
-    public void spawnMoney(Location location, Material material, int amount, int worth) {
+    public void spawnMoney(Location location, Material material, int stackSize, int worth) {
 
-        plugin.spawnMoney(location, material, amount, worth);
+        plugin.spawnMoney(location, material, stackSize, worth);
     }
 
     /**

@@ -195,11 +195,11 @@ public class MoneyItems extends JavaPlugin {
         return messaging;
     }
 
-    protected void spawnMoney(Location location, Material material, int amount, int worth) {
+    protected void spawnMoney(Location location, Material material, int stackSize, int worth) {
 
-        if(material == null || location == null || amount == 0 || worth == 0) {return;}
+        if(material == null || location == null || stackSize == 0 || worth == 0) {return;}
 
-        ItemStack itemStack = new ItemStack(material, amount);
+        ItemStack itemStack = new ItemStack(material, stackSize);
 
         ItemMeta meta = itemStack.getItemMeta();
 
@@ -210,7 +210,7 @@ public class MoneyItems extends JavaPlugin {
 
         Random uuidRandom = new Random();
 
-        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + amount;
+        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + stackSize;
 
         boolean added = false;
 
@@ -222,7 +222,7 @@ public class MoneyItems extends JavaPlugin {
                 added = true;
             } else {
 
-                hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + amount;
+                hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + stackSize;
             }
         }
 
@@ -239,7 +239,7 @@ public class MoneyItems extends JavaPlugin {
 
         location.getWorld().dropItemNaturally(location, itemStack);
     }
-
+    
     protected boolean isUUIDFound(String UUID) {
 
         if(uuids == null || uuids.size() == 0) {return false;}
