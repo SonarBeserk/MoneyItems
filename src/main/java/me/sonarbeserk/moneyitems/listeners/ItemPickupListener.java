@@ -40,7 +40,7 @@ public class ItemPickupListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void playerPickup(PlayerPickupItemEvent e) {
+    public void playerNormalPickup(PlayerPickupItemEvent e) {
 
         if(e.getPlayer() == null || e.getItem() == null) {return;}
 
