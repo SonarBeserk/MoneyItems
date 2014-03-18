@@ -136,7 +136,7 @@ public class MoneyItems extends JavaPlugin {
                     upToDate = true;
                 }
 
-                if(updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
 
                     getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", updater.getLatestName()).replace("{link}", updater.getLatestFileLink()));
                 }
@@ -150,7 +150,7 @@ public class MoneyItems extends JavaPlugin {
                     upToDate = true;
                 }
 
-                if(updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
 
                     getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", updater.getLatestName()));
                 }
