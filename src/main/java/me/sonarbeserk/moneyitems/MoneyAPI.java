@@ -62,6 +62,18 @@ public class MoneyAPI {
     }
 
     /**
+     * Spawns an silent amount of money at a location (no chat message is displayed when picked up)
+     * @param location the location to spawn the money it
+     * @param material the material to use for the money
+     * @param stackSize the size of the itemstack to spawn (used for visual purposes)
+     * @param worth the total worth of the money spawned
+     */
+    public void spawnSilentMoney(Location location, Material material, int stackSize, int worth) {
+
+        plugin.spawnSilentMoney(location, material, stackSize, worth);
+    }
+
+    /**
      * spawns a custom type of money at a location
      * @param location the loaction to spawn the money at
      * @param material the material to use for the money
@@ -73,6 +85,20 @@ public class MoneyAPI {
     public void spawnCustomMoney(Location location, Material material, String currencyNameSingular, String currencyNamePlural, int stackSize, int worth) {
 
         plugin.spawnCustomMoney(location, material, currencyNameSingular, currencyNamePlural, stackSize, worth);
+    }
+
+    /**
+     * spawns a silent custom type of money at a location (no chat message is displayed when picked up)
+     * @param location the loaction to spawn the money at
+     * @param material the material to use for the money
+     * @param currencyNameSingular the singular name for the currency
+     * @param currencyNamePlural the plural name for the currency
+     * @param stackSize the size of the itemstack to spawn (used for visual purposes)
+     * @param worth the total worth of the money spawned
+     */
+    public void spawnSilentCustomMoney(Location location, Material material, String currencyNameSingular, String currencyNamePlural, int stackSize, int worth) {
+
+        plugin.spawnSilentCustomMoney(location, material, currencyNameSingular, currencyNamePlural, stackSize, worth);
     }
 
     /**

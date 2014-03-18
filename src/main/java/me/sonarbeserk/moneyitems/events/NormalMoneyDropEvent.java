@@ -42,19 +42,24 @@ public class NormalMoneyDropEvent extends Event implements Cancellable {
 
     private int worth = 0;
 
+    private boolean silent;
+
     /**
      * Creates a NormalMoneyDropEvent
      * @param location the location of the event
      * @param itemStack the itemstack of the event
      * @param worth the total worth of the money drop
+     * @param silent if the money was silent when it was picked up
      */
-    public NormalMoneyDropEvent(Location location, ItemStack itemStack, int worth) {
+    public NormalMoneyDropEvent(Location location, ItemStack itemStack, int worth, boolean silent) {
 
         this.location = location;
 
         this.itemStack = itemStack;
 
         this.worth = worth;
+
+        this.silent = silent;
     }
 
     public HandlerList getHandlers() {
@@ -102,5 +107,14 @@ public class NormalMoneyDropEvent extends Event implements Cancellable {
     public int getWorth() {
 
         return worth;
+    }
+
+    /**
+     * Returns if the money is silent (no message sent on pickup)
+     * @return if the money is silent (no message sent on pickup)
+     */
+    public boolean isSilent() {
+
+        return silent;
     }
 }

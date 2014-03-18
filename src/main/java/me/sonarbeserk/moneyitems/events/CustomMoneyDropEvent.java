@@ -46,6 +46,8 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     private int worth = 0;
 
+    private boolean silent;
+
     /**
      * Creates a CustomMoneyDropEvent
      * @param location the location the event happened at
@@ -53,8 +55,9 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
      * @param currencyNameSingular the singular name of the currency
      * @param currencyNamePlural the plural name of the currency
      * @param worth the total worth of the money drop
+     * @param silent if the money was silent when it was picked up
      */
-    public CustomMoneyDropEvent(Location location, ItemStack itemStack, String currencyNameSingular, String currencyNamePlural, int worth) {
+    public CustomMoneyDropEvent(Location location, ItemStack itemStack, String currencyNameSingular, String currencyNamePlural, int worth, boolean silent) {
 
         this.location = location;
 
@@ -65,6 +68,8 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
         this.currencyNamePlural = currencyNamePlural;
 
         this.worth = worth;
+
+        this.silent = silent;
     }
 
     public HandlerList getHandlers() {
@@ -150,5 +155,14 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
     public int getWorth() {
 
         return worth;
+    }
+
+    /**
+     * Returns if the money is silent (no message sent on pickup)
+     * @return if the money is silent (no message sent on pickup)
+     */
+    public boolean isSilent() {
+
+        return silent;
     }
 }

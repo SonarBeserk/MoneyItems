@@ -232,7 +232,54 @@ public class MoneyItems extends JavaPlugin {
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
 
-        NormalMoneyDropEvent event = new NormalMoneyDropEvent(location, itemStack, worth);
+        NormalMoneyDropEvent event = new NormalMoneyDropEvent(location, itemStack, worth, false);
+
+        getServer().getPluginManager().callEvent(event);
+
+        if(event.isCancelled()) {return;}
+
+        location.getWorld().dropItemNaturally(location, itemStack);
+    }
+
+    protected void spawnSilentMoney(Location location, Material material, int stackSize, int worth) {
+
+        if(material == null || location == null || stackSize == 0 || worth == 0) {return;}
+
+        ItemStack itemStack = new ItemStack(material, stackSize);
+
+        ItemMeta meta = itemStack.getItemMeta();
+
+        List<String> lore = new ArrayList<String>();
+
+        lore.add("money-item");
+        lore.add("total-worth:" + worth);
+
+        Random uuidRandom = new Random();
+
+        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + stackSize;
+
+        boolean added = false;
+
+        while(!added) {
+
+            if(!MoneyAPI.getInstance().isUUIDFound(hashedUuid)) {
+
+                uuids.add(hashedUuid);
+                added = true;
+            } else {
+
+                hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + stackSize;
+            }
+        }
+
+        lore.add("uuid:" + hashedUuid);
+
+        lore.add("silent:true");
+
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+
+        NormalMoneyDropEvent event = new NormalMoneyDropEvent(location, itemStack, worth, true);
 
         getServer().getPluginManager().callEvent(event);
 
@@ -282,7 +329,59 @@ public class MoneyItems extends JavaPlugin {
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
 
-        CustomMoneyDropEvent event = new CustomMoneyDropEvent(location, itemStack, currencyNameSingular, currencyNamePlural, worth);
+        CustomMoneyDropEvent event = new CustomMoneyDropEvent(location, itemStack, currencyNameSingular, currencyNamePlural, worth, false);
+
+        getServer().getPluginManager().callEvent(event);
+
+        if(event.isCancelled()) {return;}
+
+        location.getWorld().dropItemNaturally(location, itemStack);
+    }
+
+    protected void spawnSilentCustomMoney(Location location, Material material, String currencyNameSingular, String currencyNamePlural, int stackSize, int worth) {
+
+        if(location == null || material == null || currencyNameSingular == null || currencyNamePlural == null || stackSize == 0 || worth == 0) {return;}
+
+        if(currencyNameSingular.equalsIgnoreCase("") || currencyNameSingular.equalsIgnoreCase(" ") || currencyNamePlural.equalsIgnoreCase("") || currencyNamePlural.equalsIgnoreCase(" ")) {return;}
+
+        ItemStack itemStack = new ItemStack(material, stackSize);
+
+        ItemMeta meta = itemStack.getItemMeta();
+
+        List<String> lore = new ArrayList<String>();
+
+        lore.add("custom-money-item");
+        lore.add("total-worth:" + worth);
+
+        Random uuidRandom = new Random();
+
+        String hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + stackSize;
+
+        boolean added = false;
+
+        while(!added) {
+
+            if(!MoneyAPI.getInstance().isUUIDFound(hashedUuid)) {
+
+                uuids.add(hashedUuid);
+                added = true;
+            } else {
+
+                hashedUuid = BCrypt.hashpw(String.valueOf(uuidRandom.nextInt()), BCrypt.gensalt()) + "|" + stackSize;
+            }
+        }
+
+        lore.add("uuid:" + hashedUuid);
+
+        lore.add("silent:true");
+
+        lore.add("currency-name-singular:" + currencyNameSingular);
+        lore.add("currency-name-plural:" + currencyNamePlural);
+
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+
+        CustomMoneyDropEvent event = new CustomMoneyDropEvent(location, itemStack, currencyNameSingular, currencyNamePlural, worth, true);
 
         getServer().getPluginManager().callEvent(event);
 

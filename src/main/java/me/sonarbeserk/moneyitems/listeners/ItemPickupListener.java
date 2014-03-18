@@ -56,6 +56,8 @@ public class ItemPickupListener implements Listener {
 
         int worth = 0;
 
+        boolean silent = false;
+
         for(String loreString: e.getItem().getItemStack().getItemMeta().getLore()) {
 
             if(loreString.startsWith("uuid:")) {
@@ -86,6 +88,11 @@ public class ItemPickupListener implements Listener {
 
                 continue;
             }
+
+            if(loreString.startsWith("silent:true")) {
+
+                silent = true;
+            }
         }
 
         if(remove) {
@@ -110,7 +117,12 @@ public class ItemPickupListener implements Listener {
             }
 
             plugin.economy.depositPlayer(e.getPlayer().getName(), worth);
-            plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+
+            if(!silent) {
+
+                plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+            }
+
             MoneyAPI.getInstance().useUUID(uuid);
 
             e.setCancelled(true);
@@ -140,6 +152,8 @@ public class ItemPickupListener implements Listener {
         String currencyNamePlural = null;
 
         int worth = 0;
+
+        boolean silent = false;
 
         for(String loreString: e.getItem().getItemStack().getItemMeta().getLore()) {
 
@@ -193,6 +207,11 @@ public class ItemPickupListener implements Listener {
 
                 continue;
             }
+
+            if(loreString.startsWith("silent:true")) {
+
+                silent = true;
+            }
         }
 
         if(remove) {
@@ -214,7 +233,11 @@ public class ItemPickupListener implements Listener {
                 currencyName = currencyNamePlural;
             }
 
-            plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+            if(!silent) {
+
+                plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+            }
+
             MoneyAPI.getInstance().useUUID(uuid);
 
             e.setCancelled(true);
