@@ -117,4 +117,95 @@ public class ItemPickupListener implements Listener {
             e.getItem().remove();
         }
     }
+
+    @EventHandler(ignoreCancelled = true)
+    public void playerCustomPickup(PlayerPickupItemEvent e) {
+
+        if(e.getPlayer() == null || e.getItem() == null) {return;}
+
+        if(e.getItem().getItemStack().getItemMeta().getLore() == null) {return;}
+
+        if(!e.getItem().getItemStack().getItemMeta().getLore().contains("custom-money-item")) {return;}
+
+        boolean remove = false;
+
+        boolean validUUID = false;
+
+        String uuid = null;
+
+        String currencyName = null;
+
+        int worth = 0;
+
+        for(String loreString: e.getItem().getItemStack().getItemMeta().getLore()) {
+
+            if(loreString.startsWith("uuid:")) {
+
+                String splitString[] = loreString.split("\\:");
+
+                if(splitString.length == 1) {remove = true; continue;}
+
+                if(MoneyAPI.getInstance().isUUIDFound(splitString[1])) {
+
+                    validUUID = true;
+                    uuid = splitString[1];
+                    continue;
+                } else {
+
+                    remove = true;
+                    continue;
+                }
+            }
+
+            if(loreString.startsWith("total-worth:")) {
+
+                String splitString[] = loreString.split("\\:");
+
+                if(splitString.length == 1) {remove = true; continue;}
+
+                worth = Integer.parseInt(splitString[1].replaceAll("[a-zA-Z]", ""));
+
+                continue;
+            }
+
+            if(loreString.startsWith("currency-name:")) {
+
+                String splitString[] = loreString.split("\\:");
+
+                if(splitString.length == 1) {remove = true; continue;}
+
+                currencyName = splitString[1];
+
+                continue;
+            }
+        }
+
+        if(remove) {
+
+            e.setCancelled(true);
+            e.getItem().remove();
+        }
+
+        if(validUUID) {
+
+            if(worth == 0) {
+
+                currencyName = plugin.economy.currencyNamePlural();
+            } else if(worth == 1) {
+
+                currencyName = plugin.economy.currencyNameSingular();
+            } else if(worth > 1) {
+
+                currencyName = plugin.economy.currencyNamePlural();
+            }
+
+
+
+            plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+            MoneyAPI.getInstance().useUUID(uuid);
+
+            e.setCancelled(true);
+            e.getItem().remove();
+        }
+    }
 }

@@ -62,6 +62,20 @@ public class MoneyAPI {
     }
 
     /**
+     * spawns a custom type of money at a location
+     * @param location the loaction to spawn the money at
+     * @param material the material to use for the money
+     * @param currencyNameSingular the singular name for the currency
+     * @param currencyNamePlural the plural name for the currency
+     * @param stackSize the size of the itemstack to spawn (used for visual purposes)
+     * @param worth the total worth of the money spawned
+     */
+    public void spawnCustomMoney(Location location, Material material, String currencyNameSingular, String currencyNamePlural, int stackSize, int worth) {
+
+        plugin.spawnCustomMoney(location, material, currencyNameSingular, currencyNamePlural, stackSize, worth);
+    }
+
+    /**
      * Returns if the uuid is found in the list of current uuids
      * @param UUID the uuid to check for
      * @return if the uuid is found in the list of current uuids
