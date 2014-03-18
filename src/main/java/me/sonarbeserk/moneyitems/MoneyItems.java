@@ -128,7 +128,7 @@ public class MoneyItems extends JavaPlugin {
 
             if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
 
-                updater = new Updater(this, /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, getConfig().getBoolean("settings.updater.notify-downloads"));
+                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, getConfig().getBoolean("settings.updater.notify-downloads"));
 
                 if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(this.updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
 
@@ -142,7 +142,7 @@ public class MoneyItems extends JavaPlugin {
                 }
             } else if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
 
-                updater = new Updater(this, /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.notify-downloads"));
+                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.notify-downloads"));
 
                 if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
 
