@@ -135,6 +135,10 @@ public class ItemPickupListener implements Listener {
 
         String currencyName = null;
 
+        String currencyNameSingular = null;
+
+        String currencyNamePlural = null;
+
         int worth = 0;
 
         for(String loreString: e.getItem().getItemStack().getItemMeta().getLore()) {
@@ -168,13 +172,24 @@ public class ItemPickupListener implements Listener {
                 continue;
             }
 
-            if(loreString.startsWith("currency-name:")) {
+            if(loreString.startsWith("currency-name-singular:")) {
 
                 String splitString[] = loreString.split("\\:");
 
                 if(splitString.length == 1) {remove = true; continue;}
 
-                currencyName = splitString[1];
+                currencyNameSingular = splitString[1];
+
+                continue;
+            }
+
+            if(loreString.startsWith("currency-name-plural:")) {
+
+                String splitString[] = loreString.split("\\:");
+
+                if(splitString.length == 1) {remove = true; continue;}
+
+                currencyNamePlural = splitString[1];
 
                 continue;
             }
@@ -190,16 +205,14 @@ public class ItemPickupListener implements Listener {
 
             if(worth == 0) {
 
-                currencyName = plugin.economy.currencyNamePlural();
+                currencyName = currencyNamePlural;
             } else if(worth == 1) {
 
-                currencyName = plugin.economy.currencyNameSingular();
+                currencyName = currencyNameSingular;
             } else if(worth > 1) {
 
-                currencyName = plugin.economy.currencyNamePlural();
+                currencyName = currencyNamePlural;
             }
-
-
 
             plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
             MoneyAPI.getInstance().useUUID(uuid);
