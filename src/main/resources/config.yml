@@ -25,4 +25,4 @@ settings:
     mode: notify
 
     # Should the download information of updates be logged to console?
-    notify-downloads: false
+    log-downloads: false
