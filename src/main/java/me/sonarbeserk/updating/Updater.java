@@ -4,7 +4,7 @@
 * This class provides the means to safely and easily update a plugin, or check to see if it is updated using dev.bukkit.org
 */
 
-package me.sonarbeserk.moneyitems.updating;
+package me.sonarbeserk.updating;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -68,7 +68,7 @@ public class Updater {
     private static final int BYTE_SIZE = 1024; // Used for downloading files
     private final YamlConfiguration config = new YamlConfiguration(); // Config file
     private String updateFolder;// The folder that downloads will be placed in
-    private Updater.UpdateResult result = Updater.UpdateResult.SUCCESS; // Used for determining the outcome of the update process
+    private UpdateResult result = UpdateResult.SUCCESS; // Used for determining the outcome of the update process
 
     /**
      * Gives the developer the result of the update process. Can be obtained by called {@link #getResult()}
@@ -154,7 +154,7 @@ public class Updater {
      * @param plugin The plugin that is checking for an update.
      * @param id The dev.bukkit.org id of the project.
      * @param file The file that the plugin is running from, get this by doing this.getFile() from within your main class.
-     * @param type Specify the type of update this will be. See {@link UpdateType}
+     * @param type Specify the type of update this will be. See {@link me.sonarbeserk.updating.Updater.UpdateType}
      * @param announce True if the program should announce the progress of new updates in console.
      */
     public Updater(Plugin plugin, int id, File file, UpdateType type, boolean announce) {
@@ -224,9 +224,9 @@ public class Updater {
      * Get the result of the update process.
      *
      * @return result of the update process.
-     * @see UpdateResult
+     * @see me.sonarbeserk.updating.Updater.UpdateResult
      */
-    public Updater.UpdateResult getResult() {
+    public UpdateResult getResult() {
         this.waitForThread();
         return this.result;
     }
@@ -235,7 +235,7 @@ public class Updater {
      * Get the latest version's release type.
      *
      * @return latest version's release type.
-     * @see ReleaseType
+     * @see me.sonarbeserk.updating.Updater.ReleaseType
      */
     public ReleaseType getLatestType() {
         this.waitForThread();
@@ -344,7 +344,7 @@ public class Updater {
             }
         } catch (final Exception ex) {
             this.plugin.getLogger().warning("The auto-updater tried to download a new update, but was unsuccessful.");
-            this.result = Updater.UpdateResult.FAIL_DOWNLOAD;
+            this.result = UpdateResult.FAIL_DOWNLOAD;
         } finally {
             try {
                 if (in != null) {
@@ -431,7 +431,7 @@ public class Updater {
             fSourceZip.delete();
         } catch (final IOException e) {
             this.plugin.getLogger().log(Level.SEVERE, "The auto-updater tried to unzip a new update file, but was unsuccessful.", e);
-            this.result = Updater.UpdateResult.FAIL_DOWNLOAD;
+            this.result = UpdateResult.FAIL_DOWNLOAD;
         }
         new File(file).delete();
     }
@@ -465,7 +465,7 @@ public class Updater {
 
                 if (this.hasTag(localVersion) || !this.shouldUpdate(localVersion, remoteVersion)) {
                     // We already have the latest version, or this build is tagged for no-update
-                    this.result = Updater.UpdateResult.NO_UPDATE;
+                    this.result = UpdateResult.NO_UPDATE;
                     return false;
                 }
             } else {
@@ -474,7 +474,7 @@ public class Updater {
                 this.plugin.getLogger().warning("The author of this plugin" + authorInfo + " has misconfigured their Auto Update system");
                 this.plugin.getLogger().warning("File versions should follow the format 'PluginName vVERSION'");
                 this.plugin.getLogger().warning("Please notify the author of this error.");
-                this.result = Updater.UpdateResult.FAIL_NOVERSION;
+                this.result = UpdateResult.FAIL_NOVERSION;
                 return false;
             }
         }
