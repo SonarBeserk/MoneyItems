@@ -16,7 +16,7 @@ public class UpdateListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void playerJoin(PlayerJoinEvent e) {
-        
+
         if(!e.getPlayer().hasPermission("moneyitems.notify.update")) return;
 
         if(plugin.updateFound) {
