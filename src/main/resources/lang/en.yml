@@ -11,16 +11,13 @@ pickup-money: "&2You have picked up {amount} {currency}"
 updater-up-to-date: "The version of the plugin being run is up to date!"
 
 # Sent when the updater finds a new plugin version | {new} - new version | {link} - link to the new version
-updater-notify: "The latest released version is {new}. Please go to {link} to download!"
+updater-notify: "The latest released version is {new}. The latest version may be found at {link}"
 
 # Sent when the updater downloads the new plugin version | {new} - new version
 updater-updated: "The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
 
-# Sent when the updater forcefully downloads the new plugin version | {new} - new version
-updater-force-updated: "The latest released version: {new} has been forcefully downloaded and will be loaded upon the next restart! Change the updater option in the config to not see this message again."
-
 # Sent when a user with permission is authed, it is used to inform them of the plugin update
-update-found: "&2The latest released version is {new}. Please go to {link} to download!"
+update-found: "&2The latest released version is {new}. The latest version may be found at {link}"
 
 # Sent when a user with permission is authed, it is used to inform them that the plugin has been updated and to restart the server
 update-downloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
