@@ -75,6 +75,14 @@ public class MoneyItems extends JavaPlugin {
 
         messaging = new Messaging(this);
 
+        if(data.get("uuids") != null) {
+
+            uuids = (List<String>) data.get("uuids");
+        } else {
+
+            uuids = new ArrayList<String>();
+        }
+
         if(getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
 
             setupEconomy();
@@ -94,14 +102,6 @@ public class MoneyItems extends JavaPlugin {
         }
 
         if(!getServer().getPluginManager().isPluginEnabled(this)) {return;}
-
-        if(data.get("uuids") != null) {
-
-            uuids = (List<String>) data.get("uuids");
-        } else {
-
-            uuids = new ArrayList<String>();
-        }
 
         new MoneyAPI(this);
 
@@ -410,7 +410,10 @@ public class MoneyItems extends JavaPlugin {
 
     public void onDisable() {
 
-       MoneyAPI.getInstance().flushInstance();
+        if(MoneyAPI.getInstance() != null) {
+
+            MoneyAPI.getInstance().flushInstance();
+        }
 
         data.set("uuids", uuids);
         data.save();
