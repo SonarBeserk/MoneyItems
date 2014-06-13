@@ -1,11 +1,12 @@
 name: ${project.name}
 version: ${project.version}
+author: ${project.author}
 description: ${project.description}
-author: SonarBeserk
 
-main: me.sonarbeserk.moneyitems.MoneyItems
+main: ${project.main}
 
-softdepend: [Vault]
+depend: ${project.depend}
+softdepend: ${project.softdepend}
 
 permissions:
   moneyitems.notify.updates:
