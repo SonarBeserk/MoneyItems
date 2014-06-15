@@ -1,16 +1,10 @@
 package me.sonarbeserk.moneyitems;
 
+import me.sonarbeserk.beserkcore.plugin.BeserkUpdatingJavaPlugin;
 import me.sonarbeserk.moneyitems.events.CustomMoneyDropEvent;
 import me.sonarbeserk.moneyitems.events.NormalMoneyDropEvent;
 import me.sonarbeserk.moneyitems.listeners.ItemPickupListener;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
-import me.sonarbeserk.plugin.BeserkJavaPlugin;
-import me.sonarbeserk.plugin.BeserkUpdatingJavaPlugin;
-import me.sonarbeserk.updating.UpdateListener;
-import me.sonarbeserk.updating.Updater;
-import me.sonarbeserk.utils.Data;
-import me.sonarbeserk.utils.Language;
-import me.sonarbeserk.utils.Messaging;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,7 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -318,6 +312,10 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
     }
 
     private boolean saveData() {
+        return false;
+    }
+
+    private boolean checkFileVersions() {
         return false;
     }
 
