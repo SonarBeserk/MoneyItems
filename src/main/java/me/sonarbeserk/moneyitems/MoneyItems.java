@@ -4,6 +4,8 @@ import me.sonarbeserk.moneyitems.events.CustomMoneyDropEvent;
 import me.sonarbeserk.moneyitems.events.NormalMoneyDropEvent;
 import me.sonarbeserk.moneyitems.listeners.ItemPickupListener;
 import me.sonarbeserk.moneyitems.utils.BCrypt;
+import me.sonarbeserk.plugin.BeserkJavaPlugin;
+import me.sonarbeserk.plugin.BeserkUpdatingJavaPlugin;
 import me.sonarbeserk.updating.UpdateListener;
 import me.sonarbeserk.updating.Updater;
 import me.sonarbeserk.utils.Data;
@@ -45,39 +47,18 @@ import java.util.Random;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  ***********************************************************************************************************************/
-public class MoneyItems extends JavaPlugin {
+public class MoneyItems extends BeserkUpdatingJavaPlugin {
 
     public Economy economy = null;
-
-    private Language language = null;
-
-    private Data data = null;
-
-    private Messaging messaging = null;
-
-    private Updater updater = null;
-
-    private boolean upToDate = false;
-
-    public boolean updateFound = false;
-
-    public boolean updateDownloaded = false;
 
     private List<String> uuids = null;
 
     public void onEnable() {
+        super.onEnable();
 
-        saveDefaultConfig();
+        if(getData().get("uuids") != null) {
 
-        language = new Language(this);
-
-        data = new Data(this);
-
-        messaging = new Messaging(this);
-
-        if(data.get("uuids") != null) {
-
-            uuids = (List<String>) data.get("uuids");
+            uuids = (List<String>) getData().get("uuids");
         } else {
 
             uuids = new ArrayList<String>();
@@ -106,8 +87,10 @@ public class MoneyItems extends JavaPlugin {
         new MoneyAPI(this);
 
         getServer().getPluginManager().registerEvents(new ItemPickupListener(this), this);
+    }
 
-        checkForUpdates();
+    private int getProjectID () {
+        return 00000; // Replace when releasing
     }
 
     private boolean setupEconomy() {
@@ -120,80 +103,6 @@ public class MoneyItems extends JavaPlugin {
         }
 
         return (economy != null);
-    }
-
-    private void checkForUpdates() {
-
-        if(getConfig().getBoolean("settings.updater.enabled")) {
-
-            if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
-
-                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
-
-                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
-                    upToDate = true;
-                }
-
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
-
-                    getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", updater.getLatestName()).replace("{link}", updater.getLatestFileLink()));
-                }
-            } else if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
-
-                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.log-downloads"));
-
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
-
-                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
-                    upToDate = true;
-                }
-
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
-
-                    getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", updater.getLatestName()));
-                }
-            }
-
-            getServer().getPluginManager().registerEvents(new UpdateListener(this), this);
-        }
-    }
-
-    /**
-     * Returns the plugin updater instance
-     * @return the plugin updater instance
-     */
-    public Updater getUpdater()
-    {
-        return this.updater;
-    }
-
-    /**
-     * Returns the language in use
-     * @return the language in use
-     */
-    public Language getLanguage() {
-
-        return language;
-    }
-
-    /**
-     * Returns the data instance
-     * @return the data instance
-     */
-    public Data getData() {
-
-        return data;
-    }
-
-    /**
-     * Returns the plugin messaging instance
-     * @return the plugin messaging instance
-     */
-    public Messaging getMessaging() {
-
-        return messaging;
     }
 
     protected void spawnMoney(Location location, Material material, int stackSize, int worth) {
@@ -408,6 +317,10 @@ public class MoneyItems extends JavaPlugin {
         uuids.remove(UUID);
     }
 
+    private boolean saveData() {
+        return false;
+    }
+
     public void onDisable() {
 
         if(MoneyAPI.getInstance() != null) {
@@ -415,12 +328,8 @@ public class MoneyItems extends JavaPlugin {
             MoneyAPI.getInstance().flushInstance();
         }
 
-        data.set("uuids", uuids);
-        data.save();
-        data = null;
+        getData().set("uuids", uuids);
 
-        messaging = null;
-
-        language = null;
+        super.onDisable();
     }
 }
