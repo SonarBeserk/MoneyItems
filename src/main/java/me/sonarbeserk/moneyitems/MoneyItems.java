@@ -311,13 +311,11 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
         uuids.remove(UUID);
     }
 
-    private boolean saveData() {
-        return false;
-    }
+    @Override
+    public boolean shouldSaveData() {return true;}
 
-    private boolean checkFileVersions() {
-        return false;
-    }
+    @Override
+    public boolean checkFileVersions() {return false;}
 
     public void onDisable() {
 
