@@ -87,7 +87,8 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
         getServer().getPluginManager().registerEvents(new ItemPickupListener(this), this);
     }
 
-    private int getProjectID() {
+    @Override
+    public int getProjectID() {
         return 00000; // Replace when releasing
     }
 
