@@ -6,30 +6,32 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * MoneyItems - Bukkit plugin that is a developer tool to drop items that when picked up give you money
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/moneyitems/
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
@@ -50,12 +52,13 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Creates a CustomMoneyDropEvent
-     * @param location the location the event happened at
-     * @param itemStack the itemstack involved in the event
+     *
+     * @param location             the location the event happened at
+     * @param itemStack            the itemstack involved in the event
      * @param currencyNameSingular the singular name of the currency
-     * @param currencyNamePlural the plural name of the currency
-     * @param worth the total worth of the money drop
-     * @param silent if the money was silent when it was picked up
+     * @param currencyNamePlural   the plural name of the currency
+     * @param worth                the total worth of the money drop
+     * @param silent               if the money was silent when it was picked up
      */
     public CustomMoneyDropEvent(Location location, ItemStack itemStack, String currencyNameSingular, String currencyNamePlural, int worth, boolean silent) {
 
@@ -72,12 +75,12 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
         this.silent = silent;
     }
 
-    public HandlerList getHandlers() {
+    public static HandlerList getHandlerList() {
 
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
+    public HandlerList getHandlers() {
 
         return handlers;
     }
@@ -94,6 +97,7 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns the location of the drop event
+     *
      * @return the location of the drop event
      */
     public Location getLocation() {
@@ -103,6 +107,7 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns the itemstack involved
+     *
      * @return the itemstack involved
      */
     public ItemStack getItemStack() {
@@ -112,6 +117,7 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns the singular name of the currency
+     *
      * @return the singular name of the currency
      */
     public String getCurrencyNameSingular() {
@@ -121,6 +127,7 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns the plural name of the currency
+     *
      * @return the plural name of the currency
      */
     public String getCurrencyNamePlural() {
@@ -130,17 +137,18 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns the proper name based on the worth. 0 = plural, 1 = singular, >1 = plural
+     *
      * @return the proper name based on the worth. 0 = plural, 1 = singular, >1 = plural
      */
     public String getAppropriateCurrencyName() {
 
-        if(worth == 0) {
+        if (worth == 0) {
 
             return currencyNamePlural;
-        } else if(worth == 1) {
+        } else if (worth == 1) {
 
             return currencyNameSingular;
-        } else if(worth > 1) {
+        } else if (worth > 1) {
 
             return currencyNamePlural;
         }
@@ -150,6 +158,7 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns the total worth of the item
+     *
      * @return the total worth of the item
      */
     public int getWorth() {
@@ -159,6 +168,7 @@ public class CustomMoneyDropEvent extends Event implements Cancellable {
 
     /**
      * Returns if the money is silent (no message sent on pickup)
+     *
      * @return if the money is silent (no message sent on pickup)
      */
     public boolean isSilent() {

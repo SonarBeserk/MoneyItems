@@ -3,30 +3,32 @@ package me.sonarbeserk.moneyitems;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * MoneyItems - Bukkit plugin that is a developer tool to drop items that when picked up give you money
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/moneyitems/
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class MoneyAPI {
 
     private static MoneyAPI instance = null;
@@ -42,6 +44,7 @@ public class MoneyAPI {
 
     /**
      * Returns the current instance of the api
+     *
      * @return the current instance of the api
      */
     public static MoneyAPI getInstance() {
@@ -51,10 +54,11 @@ public class MoneyAPI {
 
     /**
      * Spawns an amount of money at a location
-     * @param location the location to spawn the money it
-     * @param material the material to use for the money
+     *
+     * @param location  the location to spawn the money it
+     * @param material  the material to use for the money
      * @param stackSize the size of the itemstack to spawn (used for visual purposes)
-     * @param worth the total worth of the money spawned
+     * @param worth     the total worth of the money spawned
      */
     public void spawnMoney(Location location, Material material, int stackSize, int worth) {
 
@@ -63,10 +67,11 @@ public class MoneyAPI {
 
     /**
      * Spawns an silent amount of money at a location (no chat message is displayed when picked up)
-     * @param location the location to spawn the money it
-     * @param material the material to use for the money
+     *
+     * @param location  the location to spawn the money it
+     * @param material  the material to use for the money
      * @param stackSize the size of the itemstack to spawn (used for visual purposes)
-     * @param worth the total worth of the money spawned
+     * @param worth     the total worth of the money spawned
      */
     public void spawnSilentMoney(Location location, Material material, int stackSize, int worth) {
 
@@ -75,12 +80,13 @@ public class MoneyAPI {
 
     /**
      * spawns a custom type of money at a location
-     * @param location the loaction to spawn the money at
-     * @param material the material to use for the money
+     *
+     * @param location             the loaction to spawn the money at
+     * @param material             the material to use for the money
      * @param currencyNameSingular the singular name for the currency
-     * @param currencyNamePlural the plural name for the currency
-     * @param stackSize the size of the itemstack to spawn (used for visual purposes)
-     * @param worth the total worth of the money spawned
+     * @param currencyNamePlural   the plural name for the currency
+     * @param stackSize            the size of the itemstack to spawn (used for visual purposes)
+     * @param worth                the total worth of the money spawned
      */
     public void spawnCustomMoney(Location location, Material material, String currencyNameSingular, String currencyNamePlural, int stackSize, int worth) {
 
@@ -89,12 +95,13 @@ public class MoneyAPI {
 
     /**
      * spawns a silent custom type of money at a location (no chat message is displayed when picked up)
-     * @param location the loaction to spawn the money at
-     * @param material the material to use for the money
+     *
+     * @param location             the loaction to spawn the money at
+     * @param material             the material to use for the money
      * @param currencyNameSingular the singular name for the currency
-     * @param currencyNamePlural the plural name for the currency
-     * @param stackSize the size of the itemstack to spawn (used for visual purposes)
-     * @param worth the total worth of the money spawned
+     * @param currencyNamePlural   the plural name for the currency
+     * @param stackSize            the size of the itemstack to spawn (used for visual purposes)
+     * @param worth                the total worth of the money spawned
      */
     public void spawnSilentCustomMoney(Location location, Material material, String currencyNameSingular, String currencyNamePlural, int stackSize, int worth) {
 
@@ -103,6 +110,7 @@ public class MoneyAPI {
 
     /**
      * Returns if the uuid is found in the list of current uuids
+     *
      * @param UUID the uuid to check for
      * @return if the uuid is found in the list of current uuids
      */
@@ -113,6 +121,7 @@ public class MoneyAPI {
 
     /**
      * Uses up a uuid. The uuid will be removed from the listings
+     *
      * @param UUID the uuid to use up
      */
     public void useUUID(String UUID) {
