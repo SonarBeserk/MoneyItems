@@ -14,7 +14,6 @@
         <project.main>me.sonarbeserk.moneyitems.MoneyItems</project.main>
         <project.author>SonarBeserk</project.author>
 
-        <project.depend>[BeserkCore]</project.depend>
         <project.softdepend>[Vault]</project.softdepend>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,14 +39,19 @@
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.6.4-R2.0</version>
-            <scope>provided</scope>
         </dependency>
+		
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.2.30</version>
-            <scope>provided</scope>
         </dependency>
+		
+		<dependency>
+	        <groupId>me.sonarbeserk</groupId>
+            <artifactId>beserkcore</artifactId>
+            <version>1.0-SNAPSHOT</version>
+		</dependency>
     </dependencies>
  
     <!-- Build settings -->
@@ -88,6 +92,54 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Define JDK for compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Shading to include the compilation output of some dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/original</outputDirectory>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <!-- Exclude Provided Classes -->
+                                <excludes>
+                                    <exclude>org.bukkit:*</exclude>
+                                    <exclude>net.milkbowl.vault:*</exclude>
+                                </excludes>
+                                <includes>
+                                    <include>me.sonarbeserk:*</include>
+                                </includes>
+                            </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>me.sonarbeserk.beserkcore</pattern>
+                                    <shadedPattern>shifted.me.sonarbeserk.beserkcore</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
