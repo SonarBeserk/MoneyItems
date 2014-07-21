@@ -3,34 +3,34 @@
 # Pickup
 
 # Message to send when the player picks up money | {amount} - the amount picked up | {currency} - the name of the currency (will be use the plural form where needed)
-pickup-money: "&2You have picked up {amount} {currency}"
+pickupMoney: "&2You have picked up {amount} {currency}"
 
 # Updater
 
 # Sent when the updater reports it is up to date
-updater-up-to-date: "The version of the plugin being run is up to date!"
+updaterUpToDate: "The version of the plugin being run is up to date!"
 
 # Sent when the updater finds a new plugin version | {new} - new version | {link} - link to the new version
-updater-notify: "The latest released version is {new}. The latest version may be found at {link}"
+updaterNotify: "The latest released version is {new}. The latest version may be found at {link}"
 
 # Sent when the updater downloads the new plugin version | {new} - new version
-updater-updated: "The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
+updaterUpdated: "The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
 
 # Sent when a user with permission is authed, it is used to inform them of the plugin update
-update-found: "&2The latest released version is {new}. The latest version may be found at {link}"
+updateFound: "&2The latest released version is {new}. The latest version may be found at {link}"
 
 # Sent when a user with permission is authed, it is used to inform them that the plugin has been updated and to restart the server
-update-downloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
+updateDownloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
 
 # Hooking
 
 # Message to send when Vault has been hooked
-hooked-vault: "Successfully hooked into Vault!"
+hookedVault: "Successfully hooked into Vault!"
 
 # Severe
 
 # Severe message to send when Vault is not found
-severe-vault-not-found: "Vault was not found or was not enabled. Vault is required to function, disabling."
+severeVaultNotFound: "Vault was not found or was not enabled. Vault is required to function, disabling."
 
 # Severe message to send when no economy plugin is found when hooking vault
-severe-no-economy-found: "No economy plugin was found after hooking vault. An economy is required to function, disabling."
+severeNoEconomyFound: "No economy plugin was found after hooking vault. An economy is required to function, disabling."

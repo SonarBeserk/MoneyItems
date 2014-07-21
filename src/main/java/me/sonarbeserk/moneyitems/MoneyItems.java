@@ -66,15 +66,15 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
 
             if (economy == null) {
 
-                getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severe-no-economy-found"))));
+                getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severeNoEconomyFound"))));
                 getServer().getPluginManager().disablePlugin(this);
             } else {
 
-                getLogger().info(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("hooked-vault"))));
+                getLogger().info(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("hookedVault"))));
             }
         } else {
 
-            getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severe-vault-not-found"))));
+            getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severeVaultNotFound"))));
             getServer().getPluginManager().disablePlugin(this);
         }
 

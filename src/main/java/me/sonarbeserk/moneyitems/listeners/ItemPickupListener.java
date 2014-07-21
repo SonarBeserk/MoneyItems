@@ -134,7 +134,7 @@ public class ItemPickupListener implements Listener {
 
             if (!silent) {
 
-                plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+                plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickupMoney").replace("{amount}", worth + "").replace("{currency}", currencyName));
             }
 
             MoneyAPI.getInstance().useUUID(uuid);
@@ -267,7 +267,7 @@ public class ItemPickupListener implements Listener {
 
             if (!silent) {
 
-                plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickup-money").replace("{amount}", worth + "").replace("{currency}", currencyName));
+                plugin.getMessaging().sendMessage(e.getPlayer(), false, true, plugin.getLanguage().getMessage("pickupMoney").replace("{amount}", worth + "").replace("{currency}", currencyName));
             }
 
             MoneyAPI.getInstance().useUUID(uuid);
