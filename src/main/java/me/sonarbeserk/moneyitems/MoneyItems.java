@@ -66,7 +66,7 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
 
             if (economy == null) {
 
-                getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severeNoEconomyFound"))));
+                getLogger().severe(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severeNoEconomyFound"))));
                 getServer().getPluginManager().disablePlugin(this);
             } else {
 
@@ -74,7 +74,7 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
             }
         } else {
 
-            getLogger().warning(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severeVaultNotFound"))));
+            getLogger().severe(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', getLanguage().getMessage("severeVaultNotFound"))));
             getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -89,7 +89,7 @@ public class MoneyItems extends BeserkUpdatingJavaPlugin {
 
     @Override
     public int getProjectID() {
-        return 00000; // Replace when releasing
+        return 00000;
     }
 
     private boolean setupEconomy() {
